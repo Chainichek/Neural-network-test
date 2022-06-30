@@ -13,12 +13,20 @@ class nNetwork_class:
 
         #коэффициент обучения
         self.lr = learningrate
+        #Функция активации
+        self.activation = lambda x: (1/1 + numpy.exp(-x))
         pass
 
     #тренировка НС
     def train(): pass
 
     #опрос НС
-    def query():
-        
+    def query(self, inputsList):
+        '''
+        Создание матрицы вводимых значений
+        ndmin=2 - минимальная размерность матрицы (то бишь двумерный массив)
+        '''
+        inputs = numpy.array(inputsList, ndmin=2) 
+        #Скалярное произведение массива вводимых значений с матрицей весов  
+        hidden_inputs = numpy.dot(self.wHidIn, inputs)
         pass
