@@ -1,4 +1,5 @@
 import numpy
+import scipy.special as sc
 
 class nNetwork_class:
     #инициализация НС
@@ -13,8 +14,8 @@ class nNetwork_class:
 
         #коэффициент обучения
         self.lr = learningrate
-        #Функция активации
-        self.activation = lambda x: (1/1 + numpy.exp(-x))
+        #Функция активации (сигмоида)
+        self.activation = lambda x: sc.expit(x)
         pass
 
     #тренировка НС
@@ -22,11 +23,15 @@ class nNetwork_class:
 
     #опрос НС
     def query(self, inputsList):
-        '''
-        Создание матрицы вводимых значений
-        ndmin=2 - минимальная размерность матрицы (то бишь двумерный массив)
-        '''
-        inputs = numpy.array(inputsList, ndmin=2) 
-        #Скалярное произведение массива вводимых значений с матрицей весов  
-        hidden_inputs = numpy.dot(self.wHidIn, inputs)
-        pass
+        #Создание матрицы вводимых значений
+        #ndmin=2 - минимальная размерность матрицы (то бишь двумерный массив)
+        input_in_out = numpy.array(inputsList, ndmin=2) 
+        #Скалярное произведение массива вводимых значений с матрицей весов - для входа
+        #Функция активации  - для выхода
+        hidden_in = numpy.dot(self.wHidIn, input_in_out)
+        hidden_out = self.activation(hidden_in)
+
+        output_in = numpy.dot(self.wOutHid, hidden_out)
+        output_out = self.activation(output_in)
+
+        return output_out
