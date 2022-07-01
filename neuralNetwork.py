@@ -19,16 +19,35 @@ class nNetwork_class:
         pass
 
     #тренировка НС
-    def train(): pass
+    def train(self, inputsList, targetsList):
+        inputs = inputsList#numpy.array(inputsList, ndmin=2)
+        targets = targetsList#numpy.array(targetsList, ndmin=2)
+
+        hidden_in = numpy.dot(self.wHidIn, inputs) 
+        hidden_out = self.activation(hidden_in)
+
+        output_in = numpy.dot(self.wOutHid, hidden_out)
+        output_out = self.activation(output_in)
+
+        output_error = targets - output_out
+
+        hidden_error = numpy.dot(self.wOutHid, output_error)
+
+        self.wOutHid += self.lr * numpy.dot((output_error * output_out * (1.0 - output_out)), numpy.transpose(hidden_out))
+
+        self.wHidIn += self.lr * numpy.dot((hidden_error * hidden_out * (1.0 - hidden_out)), numpy.transpose(inputs))
+
+        pass
 
     #опрос НС
     def query(self, inputsList):
         #Создание матрицы вводимых значений
         #ndmin=2 - минимальная размерность матрицы (то бишь двумерный массив)
-        input_in_out = numpy.array(inputsList, ndmin=2) 
+        inputs = inputsList#numpy.array(inputsList, ndmin=2)
+
         #Скалярное произведение массива вводимых значений с матрицей весов - для входа
         #Функция активации  - для выхода
-        hidden_in = numpy.dot(self.wHidIn, input_in_out)
+        hidden_in = numpy.dot(self.wHidIn, inputs)
         hidden_out = self.activation(hidden_in)
 
         output_in = numpy.dot(self.wOutHid, hidden_out)
