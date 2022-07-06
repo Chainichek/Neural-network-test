@@ -24,6 +24,17 @@
   <ItemGroup>
     <Compile Include="main.py" />
     <Compile Include="neuralNetwork.py" />
+    <Compile Include="GUI.py" />
+    <Compile Include="dataBase.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="local\" />
+    <Folder Include="local\assests\" />
+    <Folder Include="local\dataset\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="local\assests\icon.ico" />
+    <Content Include="local\dataset\mnist_test.csv" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

@@ -20,8 +20,10 @@ class nNetwork_class:
 
     #тренировка НС
     def train(self, inputsList, targetsList):
-        inputs = inputsList#numpy.array(inputsList, ndmin=2)
-        targets = targetsList#numpy.array(targetsList, ndmin=2)
+        inputs = inputsList
+        #inputs = numpy.array(inputsList, ndmin=2)
+        targets = targetsList
+        #targets = numpy.array(targetsList, ndmin=2)
 
         hidden_in = numpy.dot(self.wHidIn, inputs) 
         hidden_out = self.activation(hidden_in)
@@ -31,11 +33,11 @@ class nNetwork_class:
 
         output_error = targets - output_out
 
-        hidden_error = numpy.dot(self.wOutHid, output_error)
+        hidden_error = numpy.dot(numpy.transpose(self.wOutHid), output_error)
 
-        self.wOutHid += self.lr * numpy.dot((output_error * output_out * (1.0 - output_out)), numpy.transpose(hidden_out))
+        self.wOutHid += self.lr * numpy.dot(numpy.expand_dims((output_error * output_out * (1.0 - output_out)), axis = 1), numpy.expand_dims(hidden_out, axis = 0))
 
-        self.wHidIn += self.lr * numpy.dot((hidden_error * hidden_out * (1.0 - hidden_out)), numpy.transpose(inputs))
+        self.wHidIn += self.lr * numpy.dot(numpy.expand_dims((hidden_error * hidden_out * (1.0 - hidden_out)), axis = 1), numpy.expand_dims(inputs, axis = 0))
 
         pass
 
@@ -43,7 +45,8 @@ class nNetwork_class:
     def query(self, inputsList):
         #Создание матрицы вводимых значений
         #ndmin=2 - минимальная размерность матрицы (то бишь двумерный массив)
-        inputs = inputsList#numpy.array(inputsList, ndmin=2)
+        inputs = inputsList
+        #inputs = numpy.array(inputsList, ndmin=2)
 
         #Скалярное произведение массива вводимых значений с матрицей весов - для входа
         #Функция активации  - для выхода
