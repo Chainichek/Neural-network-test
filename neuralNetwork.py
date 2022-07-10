@@ -1,6 +1,7 @@
 import numpy
 import scipy.special as sc
 
+#Класс основной работы с нейронной сетью
 class nNetwork_class:
     #инициализация НС
     def __init__(self, inputnodes, hiddennodes, outputnodes, learningrate): 
@@ -35,8 +36,8 @@ class nNetwork_class:
 
         hidden_error = numpy.dot(numpy.transpose(self.wOutHid), output_error)
 
+        #поправка весов с учётом транспонирования (так как осей не существуют, мы добавляем их с помощью expand_dims)
         self.wOutHid += self.lr * numpy.dot(numpy.expand_dims((output_error * output_out * (1.0 - output_out)), axis = 1), numpy.expand_dims(hidden_out, axis = 0))
-
         self.wHidIn += self.lr * numpy.dot(numpy.expand_dims((hidden_error * hidden_out * (1.0 - hidden_out)), axis = 1), numpy.expand_dims(inputs, axis = 0))
 
         pass

@@ -1,26 +1,21 @@
-from neuralNetwork import *
+from neuralNetwork import nNetwork_class
+from dataBase import dataBase
+
 from GUI import *
-from dataBase import *
+from globals import *
 
 import numpy
-import matplotlib.pyplot 
+import matplotlib.pyplot
 
-
-input_nodes = 784
-hidden_nodes = 100
-output_nodes = 10
-learning_rate = 0.3
-
-#gui = GUI()
 NN = nNetwork_class(input_nodes, hidden_nodes, output_nodes, learning_rate)
-trainData = dataBase("./local/dataset/mnist_test.csv")
+trainData = dataBase(path)
 
-trainData.loadData(NN)
-all_values = trainData.dataList[0].split(',')
-inputs = (asfarray(all_values[1:]) / 255.0 * 0.99) + 0.01
-print(NN.query(inputs))
+trainData.loadData(NN, epoches)
+#trainData.testData(NN, 1000)
+#print(trainData.getEfficiency())
 
-#scaled_input=(data_list[0].split(',') 
-#image_array = numpy.asfarray(all_values[1:]).reshape((28,28)) 
-#matplotlib.pyplot.imshow(image_array, cmap='Greys', interpolation='None') 
-#matplotlib.pyplot.show()
+gui = window(NN)
+
+
+
+

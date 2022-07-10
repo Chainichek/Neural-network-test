@@ -26,6 +26,7 @@
     <Compile Include="neuralNetwork.py" />
     <Compile Include="GUI.py" />
     <Compile Include="dataBase.py" />
+    <Compile Include="globals.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="local\" />
