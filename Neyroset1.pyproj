@@ -12,6 +12,8 @@
     <OutputPath>.</OutputPath>
     <Name>Neyroset1</Name>
     <RootNamespace>PythonApplication1</RootNamespace>
+    <InterpreterId>
+    </InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
